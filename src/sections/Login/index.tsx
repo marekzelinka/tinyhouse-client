@@ -30,6 +30,9 @@ export const Login = ({ setViewer }: Props) => {
     useMutation<LogInData, LogInVariables>(LOG_IN, {
       onCompleted: (data) => {
         setViewer(data.logIn)
+        if (data.logIn.token) {
+          sessionStorage.setItem('token', data.logIn.token)
+        }
         displaySuccessNotification("You've successfully logged in!")
       },
     })

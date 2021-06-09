@@ -3,9 +3,11 @@ import { render } from 'react-dom'
 import {
   ApolloClient,
   ApolloProvider,
+  createHttpLink,
   InMemoryCache,
   useMutation,
 } from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Affix, Layout, Spin } from 'antd'
 import './styles/index.css'
@@ -27,8 +29,24 @@ import {
 } from './lib/graphql/mutations/LogIn/__generated__/LogIn'
 import { AppHeaderSkeleton, ErrorBanner } from './lib/components'
 
+const httpLink = createHttpLink({
+  uri: '/graphql',
+})
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = sessionStorage.getItem('token')
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      'X-CSRF-TOKEN': token ?? '',
+    },
+  }
+})
+
 const client = new ApolloClient({
-  uri: '/api',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 })
 
@@ -45,6 +63,12 @@ const App = () => {
   const [logIn, { error }] = useMutation<LogInData, LogInVariables>(LOG_IN, {
     onCompleted: (data) => {
       setViewer(data.logIn)
+
+      if (data.logIn.token) {
+        sessionStorage.setItem('token', data.logIn.token)
+      } else {
+        sessionStorage.removeItem('token')
+      }
     },
   })
   const logInRef = useRef(logIn)
