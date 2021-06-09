@@ -30,7 +30,7 @@ import {
 import { AppHeaderSkeleton, ErrorBanner } from './lib/components'
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: '/api',
 })
 
 const authLink = setContext((_, { headers }) => {
