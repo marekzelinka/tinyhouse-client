@@ -1,9 +1,10 @@
 @import '~antd/dist/antd.css';
 @import url(https://fonts.googleapis.com/css?family=Sacramento);
 .menu {
-  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 250px;
   padding: 0 20px;
-  line-height: 63px;
   border: 0;
 }
 @media (max-width: 48em) {
@@ -12,15 +13,15 @@
   }
 }
 .app-header {
-  display: flex;
   background: #fff;
-  box-shadow: 0 2px 8px #f0f1f2;
+  display: flex;
+  justify-content: space-between;
   padding: 0;
+  box-shadow: 0 2px 8px #f0f1f2;
 }
 .app-header__logo-search-section {
   display: flex;
   align-items: center;
-  flex-grow: 1;
 }
 .app-header__logo {
   display: inline-block;
@@ -43,9 +44,6 @@
 .app-header__search-input .ant-input-group input {
   border: 1px solid #f0f1f2;
   box-shadow: 0 2px 4px rgba(29, 34, 108, 0.1);
-}
-.app-header__menu-section {
-  float: right;
 }
 .app-header-skeleton {
   display: flex;
