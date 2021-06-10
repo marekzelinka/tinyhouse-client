@@ -22,6 +22,7 @@
 .app-header__logo-search-section {
   display: flex;
   align-items: center;
+  flex: 1;
 }
 .app-header__logo {
   display: inline-block;
