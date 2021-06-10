@@ -9,7 +9,7 @@ import {
   UserVariables,
 } from '../../lib/graphql/queries/User/__generated__/User'
 import { Viewer } from '../../lib/types'
-import { Userbookings, UserListings, UserProfile } from './components'
+import { UserBookings, UserListings, UserProfile } from './components'
 
 const { Content } = Layout
 
@@ -64,7 +64,7 @@ export const User = ({ viewer }: Props) => {
   ) : null
 
   const userBookingsElement = userBookings ? (
-    <Userbookings
+    <UserBookings
       userBookings={userBookings}
       bookingsPage={bookingsPage}
       limit={PAGE_LIMIT}

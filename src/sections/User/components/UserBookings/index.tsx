@@ -11,7 +11,7 @@ interface Props {
   setBookingsPage: (bookingsPage: number) => void
 }
 
-export const Userbookings = ({
+export const UserBookings = ({
   userBookings,
   bookingsPage,
   limit,
