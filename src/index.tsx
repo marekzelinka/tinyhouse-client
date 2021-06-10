@@ -105,7 +105,9 @@ const App = () => {
           <Route exact path="/login">
             <Login setViewer={setViewer} />
           </Route>
-          <Route exact path="/user/:id" component={User} />
+          <Route exact path="/user/:id">
+            <User viewer={viewer} />
+          </Route>
           <Route component={NotFound} />
         </Switch>
       </Layout>
