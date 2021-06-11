@@ -49,8 +49,6 @@ export const Host = ({ viewer }: Props) => {
   const [imageLoading, setImageLoading] = useState(false)
   const [imageBase64Value, setImageBase64Value] = useState<string | null>(null)
 
-  const form = Form.useForm()
-
   const [hostListing, { loading, data }] = useMutation<
     HostListingData,
     HostListingVariables
