@@ -19,6 +19,7 @@ import {
   Listings,
   Login,
   NotFound,
+  Stripe,
   User,
 } from './sections'
 import { Viewer } from './lib/types'
@@ -105,8 +106,11 @@ const App = () => {
           <Route exact path="/login">
             <Login setViewer={setViewer} />
           </Route>
+          <Route exact path="/stripe">
+            <Stripe viewer={viewer} setViewer={setViewer} />
+          </Route>
           <Route exact path="/user/:id">
-            <User viewer={viewer} />
+            <User viewer={viewer} setViewer={setViewer} />
           </Route>
           <Route component={NotFound} />
         </Switch>
