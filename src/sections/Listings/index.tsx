@@ -19,7 +19,7 @@ import {
 const { Content } = Layout
 const { Title, Paragraph, Text } = Typography
 
-const PAGE_LIMIT = 4
+const PAGE_LIMIT = 8
 
 export const Listings = () => {
   const { location } = useParams<{ location: string }>()
