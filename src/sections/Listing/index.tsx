@@ -13,6 +13,7 @@ import { Viewer } from '../../lib/types'
 import {
   ListingBookings,
   ListingCreateBooking,
+  ListingCreateBookingModal,
   ListingDetails,
 } from './components'
 
@@ -39,6 +40,7 @@ export const Listing = ({ viewer }: Props) => {
   )
   const [checkInDate, setCheckInDate] = useState<Moment | null>(null)
   const [checkOutDate, setCheckOutDate] = useState<Moment | null>(null)
+  const [modalVisible, setModalVisible] = useState(false)
 
   if (loading) {
     return (
@@ -84,8 +86,20 @@ export const Listing = ({ viewer }: Props) => {
       checkOutDate={checkOutDate}
       setCheckInDate={setCheckInDate}
       setCheckOutDate={setCheckOutDate}
+      setModalVisible={setModalVisible}
     />
   ) : null
+
+  const listingCreateBookingModalElement =
+    listing && checkInDate && checkOutDate ? (
+      <ListingCreateBookingModal
+        price={listing.price}
+        modalVisible={modalVisible}
+        checkInDate={checkInDate}
+        checkOutDate={checkOutDate}
+        setModalVisible={setModalVisible}
+      />
+    ) : null
 
   return (
     <Content className="listings">
@@ -98,6 +112,7 @@ export const Listing = ({ viewer }: Props) => {
           {listingCreateBookingElement}
         </Col>
       </Row>
+      {listingCreateBookingModalElement}
     </Content>
   )
 }
