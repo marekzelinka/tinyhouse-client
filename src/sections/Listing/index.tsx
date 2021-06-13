@@ -9,6 +9,7 @@ import {
   Listing as ListingData,
   ListingVariables,
 } from '../../lib/graphql/queries/Listing/__generated__/Listing'
+import { useScrollTop } from '../../lib/hooks'
 import { Viewer } from '../../lib/types'
 import {
   ListingBookings,
@@ -26,6 +27,7 @@ interface Props {
 }
 
 export const Listing = ({ viewer }: Props) => {
+  useScrollTop()
   const { id } = useParams<{ id: string }>()
   const [bookingsPage, setBookingsPage] = useState(1)
   const { data, loading, error, refetch } = useQuery<

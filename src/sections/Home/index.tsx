@@ -12,6 +12,7 @@ import {
   ListingsVariables,
 } from '../../lib/graphql/queries/Listings/__generated__/Listings'
 import { ListingsFilter } from '../../lib/graphql/globalTypes'
+import { useScrollTop } from '../../lib/hooks'
 
 const { Content } = Layout
 const { Title, Paragraph } = Typography
@@ -20,6 +21,7 @@ const PAGE_LIMIT = 4
 const PAGE_NUMBER = 1
 
 export const Home = () => {
+  useScrollTop()
   const { loading, data } = useQuery<ListingsData, ListingsVariables>(
     LISTINGS,
     {

@@ -10,6 +10,7 @@ import {
   Listings as ListingsData,
   ListingsVariables,
 } from '../../lib/graphql/queries/Listings/__generated__/Listings'
+import { useScrollTop } from '../../lib/hooks'
 import {
   ListingsFilters,
   ListingsPagination,
@@ -22,6 +23,7 @@ const { Title, Paragraph, Text } = Typography
 const PAGE_LIMIT = 8
 
 export const Listings = () => {
+  useScrollTop()
   const { location } = useParams<{ location: string }>()
   const locationRef = useRef(location)
   const [filter, setFilter] = useState(ListingsFilter.PRICE_LOW_TO_HIGH)

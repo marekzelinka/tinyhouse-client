@@ -1,10 +1,13 @@
 import { Empty, Layout, Typography } from 'antd'
 import { Link } from 'react-router-dom'
+import { useScrollTop } from '../../lib/hooks'
 
 const { Content } = Layout
 const { Text } = Typography
 
 export const NotFound = () => {
+  useScrollTop()
+
   return (
     <Content className="not-found">
       <Empty

@@ -7,6 +7,7 @@ import {
   ConnectStripe,
   ConnectStripeVariables,
 } from '../../lib/graphql/mutations/ConnectStripe/__generated__/ConnectStripe'
+import { useScrollTop } from '../../lib/hooks'
 import { Viewer } from '../../lib/types'
 import { displaySuccessNotification } from '../../lib/utils'
 
@@ -18,6 +19,7 @@ interface Props {
 }
 
 export const Stripe = ({ viewer, setViewer }: Props) => {
+  useScrollTop()
   const [connectStripe, { data, loading, error }] = useMutation<
     ConnectStripe,
     ConnectStripeVariables

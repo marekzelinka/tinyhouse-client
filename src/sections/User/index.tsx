@@ -8,6 +8,7 @@ import {
   User as UserData,
   UserVariables,
 } from '../../lib/graphql/queries/User/__generated__/User'
+import { useScrollTop } from '../../lib/hooks'
 import { Viewer } from '../../lib/types'
 import { UserBookings, UserListings, UserProfile } from './components'
 
@@ -21,6 +22,7 @@ interface Props {
 }
 
 export const User = ({ viewer, setViewer }: Props) => {
+  useScrollTop()
   const { id } = useParams<{ id: string }>()
   const [listingsPage, setListingsPage] = useState(1)
   const [bookingsPage, setBookingsPage] = useState(1)

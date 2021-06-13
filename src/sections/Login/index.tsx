@@ -16,6 +16,7 @@ import {
   displaySuccessNotification,
 } from '../../lib/utils'
 import { ErrorBanner } from '../../lib/components'
+import { useScrollTop } from '../../lib/hooks'
 
 const { Content } = Layout
 const { Text, Title } = Typography
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export const Login = ({ setViewer }: Props) => {
+  useScrollTop()
   const client = useApolloClient()
   const [logIn, { data: logInData, loading: logInLoading, error: logInError }] =
     useMutation<LogInData, LogInVariables>(LOG_IN, {

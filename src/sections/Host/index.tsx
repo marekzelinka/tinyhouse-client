@@ -24,6 +24,7 @@ import {
   HostListing as HostListingData,
   HostListingVariables,
 } from '../../lib/graphql/mutations/HostListing/__generated__/HostListing'
+import { useScrollTop } from '../../lib/hooks'
 import { Viewer } from '../../lib/types'
 import {
   displayErrorMessage,
@@ -46,6 +47,7 @@ interface Props {
 }
 
 export const Host = ({ viewer }: Props) => {
+  useScrollTop()
   const [imageLoading, setImageLoading] = useState(false)
   const [imageBase64Value, setImageBase64Value] = useState<string | null>(null)
 
