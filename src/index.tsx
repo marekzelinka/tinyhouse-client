@@ -103,7 +103,9 @@ const App = () => {
           <Route exact path="/host">
             <Host viewer={viewer} />
           </Route>
-          <Route exact path="/listing/:id" component={Listing} />
+          <Route exact path="/listing/:id">
+            <Listing viewer={viewer} />
+          </Route>
           <Route exact path="/listings/:location?" component={Listings} />
           <Route exact path="/login">
             <Login setViewer={setViewer} />

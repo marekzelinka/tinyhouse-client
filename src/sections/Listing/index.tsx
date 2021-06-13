@@ -9,6 +9,7 @@ import {
   Listing as ListingData,
   ListingVariables,
 } from '../../lib/graphql/queries/Listing/__generated__/Listing'
+import { Viewer } from '../../lib/types'
 import {
   ListingBookings,
   ListingCreateBooking,
@@ -19,7 +20,11 @@ const { Content } = Layout
 
 const PAGE_LIMIT = 3
 
-export const Listing = () => {
+interface Props {
+  viewer: Viewer
+}
+
+export const Listing = ({ viewer }: Props) => {
   const { id } = useParams<{ id: string }>()
   const [bookingsPage, setBookingsPage] = useState(1)
   const { data, loading, error } = useQuery<ListingData, ListingVariables>(
@@ -71,7 +76,10 @@ export const Listing = () => {
 
   const listingCreateBookingElement = listing ? (
     <ListingCreateBooking
+      viewer={viewer}
+      host={listing.host}
       price={listing.price}
+      bookingsIndex={listing.bookingsIndex}
       checkInDate={checkInDate}
       checkOutDate={checkOutDate}
       setCheckInDate={setCheckInDate}
