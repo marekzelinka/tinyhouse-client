@@ -28,19 +28,29 @@ interface Props {
 export const Listing = ({ viewer }: Props) => {
   const { id } = useParams<{ id: string }>()
   const [bookingsPage, setBookingsPage] = useState(1)
-  const { data, loading, error } = useQuery<ListingData, ListingVariables>(
-    LISTING,
-    {
-      variables: {
-        id: id,
-        bookingsPage,
-        limit: PAGE_LIMIT,
-      },
-    }
-  )
+  const { data, loading, error, refetch } = useQuery<
+    ListingData,
+    ListingVariables
+  >(LISTING, {
+    variables: {
+      id: id,
+      bookingsPage,
+      limit: PAGE_LIMIT,
+    },
+  })
   const [checkInDate, setCheckInDate] = useState<Moment | null>(null)
   const [checkOutDate, setCheckOutDate] = useState<Moment | null>(null)
   const [modalVisible, setModalVisible] = useState(false)
+
+  const clearBookingData = () => {
+    setModalVisible(false)
+    setCheckInDate(null)
+    setCheckOutDate(null)
+  }
+
+  const handleListingRefetch = async () => {
+    await refetch()
+  }
 
   if (loading) {
     return (
@@ -93,11 +103,14 @@ export const Listing = ({ viewer }: Props) => {
   const listingCreateBookingModalElement =
     listing && checkInDate && checkOutDate ? (
       <ListingCreateBookingModal
+        id={listing.id}
         price={listing.price}
         modalVisible={modalVisible}
         checkInDate={checkInDate}
         checkOutDate={checkOutDate}
         setModalVisible={setModalVisible}
+        clearBookingData={clearBookingData}
+        handleListingRefetch={handleListingRefetch}
       />
     ) : null
 

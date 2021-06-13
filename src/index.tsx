@@ -29,6 +29,8 @@ import {
   LogInVariables,
 } from './lib/graphql/mutations/LogIn/__generated__/LogIn'
 import { AppHeaderSkeleton, ErrorBanner } from './lib/components'
+import { loadStripe } from '@stripe/stripe-js'
+import { Elements } from '@stripe/react-stripe-js'
 
 const httpLink = createHttpLink({
   uri: '/api',
@@ -91,6 +93,8 @@ const App = () => {
     <ErrorBanner description="We weren't able to verify if you were logged in. Please try again later!" />
   ) : null
 
+  const stripe = loadStripe(process.env.REACT_APP_S_PUBLISHABLE_KEY as string)
+
   return (
     <Router>
       <Layout id="app">
@@ -104,7 +108,9 @@ const App = () => {
             <Host viewer={viewer} />
           </Route>
           <Route exact path="/listing/:id">
-            <Listing viewer={viewer} />
+            <Elements stripe={stripe}>
+              <Listing viewer={viewer} />
+            </Elements>
           </Route>
           <Route exact path="/listings/:location?" component={Listings} />
           <Route exact path="/login">
