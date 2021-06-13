@@ -28,6 +28,7 @@ export const User = ({ viewer, setViewer }: Props) => {
     USER,
     {
       variables: { id, bookingsPage, listingsPage, limit: PAGE_LIMIT },
+      fetchPolicy: 'network-only',
     }
   )
 
